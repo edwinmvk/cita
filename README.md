@@ -1,7 +1,7 @@
 <h1 align="center">Conversational Interview and Training Assistant - CITA</h1>
 <p>
     <a href="#" target="_blank">
-        <img alt="License: MIT" src="https://img.shields.io/badge/License-Apache-yellow.svg" />
+        <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
     </a>
 </p>
 
@@ -49,12 +49,13 @@ KINDE_POST_LOGIN_REDIRECT_URL=http://localhost:3000/dashboard
 ```
 
 ## Installation
+
 Install the dependencies by running the following commands in your terminal:
 
 ```sh
 pnpm install
 npx prisma generate
-npx prisma db push
+npx prisma db generate
 ```
 
 ## Usage
@@ -69,4 +70,4 @@ This will start the project and open the app in your default browser. This may t
 
 ## License
 
-This project is licensed under the Apache License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the LICENSE file for details.
