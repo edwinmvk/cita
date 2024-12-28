@@ -75,9 +75,6 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" className="light">
-      <head>
-        <link rel="icon" href="/images/favicon.ico" />
-      </head>
       <body
         className={cn(
           "min-h-screen font-sans antialiased bg-white",

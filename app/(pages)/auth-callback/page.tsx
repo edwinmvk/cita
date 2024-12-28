@@ -27,14 +27,6 @@ export default function Page() {
     checkAuth();
   }, []);
 
-  // Get request
-  const checkAuth = async () => {
-    const response = await actionSigninSignup();
-    if (response) {
-      router.push(origin ? origin : "/dashboard");
-    }
-  };
-
   return (
     <section>
       <div className="w-full mt-24 flex flex-col items-center justify-center gap-2">

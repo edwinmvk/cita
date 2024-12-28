@@ -28,7 +28,7 @@ export default async function Navbar() {
     auth = false;
   }
   return (
-    <nav className="w-full h-20 sticky z-30 inset-x-0 px-4 top-0 border-b border-gray-200 bg-white/70 backdrop-blur-xl transition-all">
+    <header className="fixed top-0 w-full h-20 z-30 bg-white/80 backdrop-blur-sm">
       <MaxWidthWrapper>
         <div className="flex h-20 items-center justify-between">
           <Link
@@ -51,7 +51,7 @@ export default async function Navbar() {
             <span className={`${pacifico.className} text-[#5a338a]`}>A.</span>
           </Link>
 
-          {/* Avatar must only be shown when signed in */}
+          {/* Avatar must only be shown when signed in and on smaller screens*/}
           {auth ? (
             <div className="sm:hidden">
               <DropdownMenu>
@@ -75,17 +75,16 @@ export default async function Navbar() {
             </div>
           ) : null}
 
-          {/* Links must only be shown when not signed in */}
+          {/* Links must be shown only on larger screens */}
           <div className="hidden sm:flex items-center space-x-4">
             <Link
               href="/"
               className={buttonVariants({
                 variant: "ghost",
                 size: "sm",
-                className: "text-[15px] text-gray-900 font-semibold",
               })}
             >
-              <h4>Pricing</h4>
+              <h4 className="text-[16px]">Pricing</h4>
             </Link>
 
             {auth ? (
@@ -93,10 +92,9 @@ export default async function Navbar() {
                 className={buttonVariants({
                   variant: "ghost",
                   size: "sm",
-                  className: "text-[15px] text-gray-900 font-semibold",
                 })}
               >
-                <h4>Sign out</h4>
+                <h4 className="text-[16px]">Sign out</h4>
               </LogoutLink>
             ) : (
               <>
@@ -104,10 +102,9 @@ export default async function Navbar() {
                   className={buttonVariants({
                     variant: "ghost",
                     size: "sm",
-                    className: "text-[15px] text-gray-900 font-semibold",
                   })}
                 >
-                  <h4>Sign in</h4>
+                  <h4 className="text-[16px]">Sign in</h4>
                 </LoginLink>
 
                 <RegisterLink
@@ -116,13 +113,14 @@ export default async function Navbar() {
                     size: "sm",
                   })}
                 >
-                  Get started <ArrowRight className="ml-1.5 h-5 w-5" />
+                  <h4 className="text-[16px]"></h4>Get started{" "}
+                  <ArrowRight className="ml-1.5 h-5 w-5" />
                 </RegisterLink>
               </>
             )}
           </div>
         </div>
       </MaxWidthWrapper>
-    </nav>
+    </header>
   );
 }

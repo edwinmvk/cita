@@ -3,34 +3,30 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  directUrl         = env("DIRECT_URL")
 }
 
 model User {
-  id         String   @id @default(cuid())
-  kindeId    String    @unique 
-  name       String?
-  email      String   @unique
-  createdAt  DateTime  @default(now())
-
-  image      String?
-
+  id                  String   @id @default(cuid())
+  kindeId             String   @unique 
+  email               String   @unique
+  name                String?
+  image               String?
+  createdAt           DateTime @default(now())
   Interview Interview[]
-  
 }
 
 model Interview {
   id                  String   @id @default(cuid())
   date                DateTime @default(now())
-  
   resume              String
   jobTitle            String
 
   questions           String[]
   userAnswers         String[]
   
-  totalScore          Int
   angry               Float
   sad                 Float
   neutral             Float
@@ -41,9 +37,24 @@ model Interview {
   agreeableness       Float
   conscientiousness   Float
   openness            Float
-  similarityScoreList Float[]
+  totalScore          Int
   similarityScore     Float
+  similarityScoreList Float[]
 
-  userId              String?
-  User                User?    @relation(fields: [userId], references: [kindeId])
+  createdAt  DateTime  @default(now())
+
+  User                User    @relation(fields: [userId], references: [email])
+  userId              String
 }
+
+// model Service {
+//   id          Int           @id @default(autoincrement())
+//   method      Method        @default(GET)
+//   createdAt   DateTime      @default(now())
+//   updatedAt   DateTime      @updatedAt
+// }
+
+// enum Method {
+//   GET 
+//   POST
+// }
