@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
+import { actionDeleteInterview } from "@/lib/actions";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Ghost, Loader2, Plus, Trash } from "lucide-react";
-import Skeleton from "react-loading-skeleton";
 import { format } from "date-fns";
 import LineChart from "./LineChart";
 
@@ -22,18 +22,34 @@ type Props = {
   interviews: InterviewData[];
 };
 
-export default function DashboardComponent({ interviews }: Props) {
-  const [currentDeletingFile, setCurrentDeletingFile] = useState<string | null>(
-    null
+export default function Dashboard({ interviews }: Props) {
+  // This is just the example to use useActionState with extra parameters
+  // const [state, action, isPending] = useActionState(actionServiceEdit, null);
+  // action={(formData) => action({ formData, data })}
+  // export async function actionServiceEdit(previousState = {},{ formData, data }){}
+
+  const [pendingButtons, setPendingButtons] = useState<Record<string, boolean>>(
+    {}
   );
+  const router = useRouter();
 
   const scoreList = interviews.map((interview) => interview.totalScore);
 
-  const router = useRouter();
+  async function handleDelete(id: string) {
+    setPendingButtons((prev) => ({ ...prev, [id]: true }));
+    try {
+      await actionDeleteInterview(id);
+    } catch (e) {
+      throw new Error("Unexpect error occured while deleting the interview");
+    } finally {
+      setPendingButtons((prev) => ({ ...prev, [id]: false }));
+      router.refresh();
+    }
+  }
 
-  const DisplayFiles: React.FC = () => {
+  function DisplayFiles() {
     return (
-      <ul className="my-2 p-3 grid gap-6 grid-cols-2 lg:grid-cols-3 border-2 shadow-lg rounded-lg">
+      <ul className="mt-5 mb-10 p-3 grid gap-6 grid-cols-2 lg:grid-cols-3 shadow-inner rounded-lg">
         {interviews
           .sort(
             (a, b) =>
@@ -45,10 +61,7 @@ export default function DashboardComponent({ interviews }: Props) {
               key={file.id}
               className="flex flex-col divide-y divide-gray-200 rounded-lg bg-white shadow transition hover:shadow-lg border border-1 border-gray-100"
             >
-              <div
-                className="pt-6 px-6 flex w-full items-center justify-between space-x-6 cursor-pointer"
-                onClick={() => router.push(`\\result\\${file.id}`)}
-              >
+              <div className="pt-6 px-6 flex w-full items-center justify-between space-x-6 cursor-pointer">
                 <div className="h-10 w-10 flex-shrink-0 rounded-full bg-gradient-to-r from-zinc-200 to-neutral-200" />
                 <div className="flex-1 text-ellipsis overflow-hidden">
                   {/* "text-ellipsis overflow-hidden" is same as "truncate" */}
@@ -65,12 +78,13 @@ export default function DashboardComponent({ interviews }: Props) {
                 </div>
 
                 <Button
-                  onClick={() => null}
+                  onClick={() => handleDelete(file.id)}
                   size="sm"
                   className="w-full"
                   variant="destructive"
+                  disabled={pendingButtons[file.id]} // Add this to disable the button during transition
                 >
-                  {currentDeletingFile === file.id ? (
+                  {pendingButtons[file.id] ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
                   ) : (
                     <Trash className="h-4 w-4" />
@@ -91,9 +105,9 @@ export default function DashboardComponent({ interviews }: Props) {
         </Link>
       </ul>
     );
-  };
+  }
 
-  const DisplayEmpty: React.FC = () => {
+  function DisplayEmpty() {
     return (
       <div className="mt-16 flex flex-col items-center gap-2 text-zinc-400 select-none">
         <Ghost className="h-8 w-8 text-zinc-400" />
@@ -107,7 +121,7 @@ export default function DashboardComponent({ interviews }: Props) {
         </p>
       </div>
     );
-  };
+  }
 
   return (
     <MaxWidthWrapper>

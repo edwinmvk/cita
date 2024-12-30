@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 import prismadb from "@/lib/prismadb";
@@ -105,9 +106,75 @@ export async function actionFetchInterviews() {
     } else {
       console.error("Unknown error:", error);
     }
+
     return {
       error: true,
-      message: error,
+      message: "Failed to fetch interviews",
+    };
+  }
+}
+
+export async function actionDeleteInterview(id: string) {
+  // get the session of logged in user
+  const { getUser, isAuthenticated } = getKindeServerSession();
+
+  if (!(await isAuthenticated())) {
+    redirect("/api/auth/login");
+  }
+
+  try {
+    // check if the user is already logged in the browser session
+    const user = await getUser();
+
+    if (!user?.id || !user?.email) {
+      throw new Error("Invalid user data from Kinde");
+    }
+
+    // First, check if the service exists and belongs to the user
+    const service = await prismadb.interview.findUnique({
+      where: {
+        id: id,
+        userId: user.id, // Ensure the service belongs to the logged-in user
+      },
+    });
+
+    // If no service found, return an error
+    if (!service) {
+      return {
+        error: true,
+        message: "Interview not found or you do not have permission to delete",
+      };
+    }
+
+    // Delete the service
+    const deletedService = await prismadb.interview.delete({
+      where: {
+        id: id,
+      },
+    });
+
+    // Revalidate the path to refresh server-side rendered content, so that the latest service data is displayed
+    revalidatePath("/dashboard");
+    return {
+      error: false,
+      message: "Service successfully deleted",
+      service: deletedService,
+    };
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error("Detailed error:", {
+        error: true,
+        message: error.message,
+        name: error.name,
+        stack: error.stack,
+      });
+    } else {
+      console.error("Unknown error:", error);
+    }
+
+    return {
+      error: true,
+      message: "Failed to delete interview",
     };
   }
 }

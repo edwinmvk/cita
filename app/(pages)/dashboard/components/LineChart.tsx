@@ -12,11 +12,11 @@ const colors = {
   },
 };
 
-interface LineChartProps {
+type Props = {
   scores: number[];
-}
+};
 
-const LineChart: React.FC<LineChartProps> = ({ scores }) => {
+function LineChart({ scores }: Props) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -69,6 +69,6 @@ const LineChart: React.FC<LineChartProps> = ({ scores }) => {
       <canvas id="myChart" ref={canvasRef} height={100} />
     </div>
   );
-};
+}
 
 export default LineChart;
