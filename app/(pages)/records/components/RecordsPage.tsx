@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { Button } from "@/components/ui/button";
-import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { Ghost, Loader2, Plus, Trash } from "lucide-react";
 import Skeleton from "react-loading-skeleton";
 import { format } from "date-fns";
@@ -116,7 +115,6 @@ const RecordsPage: React.FC = () => {
 
   return (
     <MaxWidthWrapper>
-      <BreadcrumbNav />
       <div className="mt-8 flex flex-col items-start justify-between gap-4 border-b border-gray-200 pb-5 xs:flex-row xs:items-center sm:gap-0">
         <h2 className="mb-3 font-semibold text-gray-900 leading-loose">
           All my previous <br />

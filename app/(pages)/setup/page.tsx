@@ -4,6 +4,8 @@ import { redirect } from "next/navigation";
 import prismadb from "@/lib/prismadb";
 import { inter } from "@/lib/fonts";
 import SetupPage from "./components/SetupPage";
+import BreadcrumbNav from "@/components/BreadcrumbNav";
+import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 
 export const metadata: Metadata = {
   title: "Setup",
@@ -13,24 +15,30 @@ export default async function Page() {
   // get the session of logged in user
   const { getUser } = getKindeServerSession();
 
-  // Check if the user is already logged in the browser
+  // check if the user is already logged in the browser session
   const user = await getUser();
   if (!user || !user.id) {
+    console.log("No user found in session, redirecting to auth-callback");
     redirect("/auth-callback?origin=setup");
   }
 
-  // If logged in browser, also check the database for the user
+  // if logged in browser, also check the database for the user
   const dbUser = await prismadb.user.findUnique({
     where: {
-      kindeId: user?.id,
+      kindeId: user.id,
     },
   });
+
   if (!dbUser) {
-    redirect("/auth-callback?origin=dashboard");
+    console.log("No user found in database, redirecting to auth-callback");
+    redirect("/auth-callback?origin=setup");
   }
 
   return (
     <section className={`${inter.className}`}>
+      <MaxWidthWrapper>
+        <BreadcrumbNav />
+      </MaxWidthWrapper>
       <SetupPage />
     </section>
   );

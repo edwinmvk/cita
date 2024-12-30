@@ -28,7 +28,7 @@ export default async function Navbar() {
     auth = false;
   }
   return (
-    <header className="fixed top-0 w-full h-20 z-30 bg-white/80 backdrop-blur-sm">
+    <header className="sticky top-0 w-full h-20 z-30 bg-white/80 backdrop-blur-sm">
       <MaxWidthWrapper>
         <div className="flex h-20 items-center justify-between">
           <Link
@@ -78,7 +78,7 @@ export default async function Navbar() {
           {/* Links must be shown only on larger screens */}
           <div className="hidden sm:flex items-center space-x-4">
             <Link
-              href="/"
+              href=""
               className={buttonVariants({
                 variant: "ghost",
                 size: "sm",

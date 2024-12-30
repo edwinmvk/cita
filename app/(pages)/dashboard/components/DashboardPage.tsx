@@ -2,15 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { Ghost, Loader2, Plus, Trash } from "lucide-react";
 import Skeleton from "react-loading-skeleton";
 import { format } from "date-fns";
 import LineChart from "./LineChart";
-import { useRouter } from "next/navigation";
 
 type InterviewData = {
   id: string;
@@ -135,7 +134,6 @@ const DashboardPage: React.FC = () => {
 
   return (
     <MaxWidthWrapper>
-      <BreadcrumbNav />
       <div className="my-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
           <div className="flex flex-col items-start justify-between gap-4 border-b border-gray-200 pb-5 xs:flex-row xs:items-center sm:gap-0">

@@ -4,38 +4,8 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 import prismadb from "@/lib/prismadb";
 
-// export async function actionSigninSignup() {
-//   // get the auth status of logged in user
-//   const { isAuthenticated } = getKindeServerSession();
-
-//   // check whether user logged in the browser
-//   if (!(await isAuthenticated())) {
-//     redirect("/api/auth/login");
-//   }
-
-//   // check if user is in database
-//   const { getUser } = getKindeServerSession();
-//   const user = await getUser();
-//   const dbUser = await prismadb.user.findUnique({
-//     where: {
-//       kindeId: user?.id,
-//     },
-//   });
-
-//   // if there is no user, then create a new user
-//   if (!dbUser && user != null && user?.email != null) {
-//     await prismadb.user.create({
-//       data: {
-//         kindeId: user?.id,
-//         name: user?.given_name!,
-//         email: user?.email,
-//       },
-//     });
-//   }
-//   return true;
-// }
-
 export async function actionSigninSignup() {
+  // get the session of logged in user
   const { getUser, isAuthenticated } = getKindeServerSession();
 
   if (!(await isAuthenticated())) {
@@ -43,18 +13,21 @@ export async function actionSigninSignup() {
   }
 
   try {
+    // check if the user is already logged in the browser session
     const user = await getUser();
 
     if (!user?.id || !user?.email) {
       throw new Error("Invalid user data from Kinde");
     }
 
+    // check if user is in database
     const dbUser = await prismadb.user.findUnique({
       where: {
         kindeId: user.id,
       },
     });
 
+    // if there is no user, then create a new user
     if (!dbUser) {
       await prismadb.user.create({
         data: {
@@ -67,7 +40,16 @@ export async function actionSigninSignup() {
 
     return true;
   } catch (error) {
-    console.log(error);
-    throw new Error("Authentication failed");
+    if (error instanceof Error) {
+      console.error("Detailed error:", {
+        name: error.name,
+        message: error.message,
+        stack: error.stack,
+      });
+      throw new Error(error.message);
+    } else {
+      console.error("Unknown error:", error);
+      throw new Error("Unknown error");
+    }
   }
 }

@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { buttonVariants } from "@/components/ui/button";
-import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { StickyNote, BookOpenText } from "lucide-react";
 
 const SetupPage: React.FC = () => {
@@ -35,7 +34,6 @@ const SetupPage: React.FC = () => {
 
   return (
     <MaxWidthWrapper>
-      <BreadcrumbNav />
       <div className="mt-8 flex flex-col items-start justify-between gap-4 border-b border-gray-200 pb-5 xs:flex-row xs:items-center sm:gap-0">
         <h2 className="mb-3 font-semibold text-gray-900 leading-loose">
           Getting ready to <br />
