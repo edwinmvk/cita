@@ -1,11 +1,14 @@
+import { Suspense } from "react";
 import { Metadata } from "next";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 import prismadb from "@/lib/prismadb";
 import { inter } from "@/lib/fonts";
-import DashboardPage from "./components/DashboardPage";
+import DashboardComponent from "./components/DashboardComponent";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
+import { actionFetchInterviews } from "@/lib/actions";
+import Skeleton from "react-loading-skeleton";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -34,12 +37,27 @@ export default async function Page() {
     redirect("/auth-callback?origin=dashboard");
   }
 
+  function DisplayLoading() {
+    return (
+      <MaxWidthWrapper className="py-6">
+        <Skeleton height={60} className="my-2" count={6} enableAnimation />
+      </MaxWidthWrapper>
+    );
+  }
+
+  async function DashboardPage() {
+    const { interviews } = await actionFetchInterviews();
+    return <DashboardComponent interviews={interviews || []} />;
+  }
+
   return (
     <section className={`${inter.className}`}>
       <MaxWidthWrapper>
         <BreadcrumbNav />
       </MaxWidthWrapper>
-      <DashboardPage />
+      <Suspense fallback={<DisplayLoading />}>
+        <DashboardPage />
+      </Suspense>
     </section>
   );
 }

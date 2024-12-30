@@ -13,47 +13,28 @@ import LineChart from "./LineChart";
 
 type InterviewData = {
   id: string;
-  name: string;
-  createdAt: string;
-  score: number;
+  jobTitle: string;
+  createdAt: Date;
+  totalScore: number;
 };
 
-const DashboardPage: React.FC = () => {
+type Props = {
+  interviews: InterviewData[];
+};
+
+export default function DashboardComponent({ interviews }: Props) {
   const [currentDeletingFile, setCurrentDeletingFile] = useState<string | null>(
     null
   );
 
-  const [interviews, setInterviews] = useState<InterviewData[] | null>(null);
-  const [scoreList, setScoreList] = useState<number[]>([]);
+  const scoreList = interviews.map((interview) => interview.totalScore);
 
   const router = useRouter();
 
-  const fetchInterviews = async () => {
-    try {
-      const response = await fetch("/api/interviews");
-      if (!response.ok) {
-        throw new Error("Failed to fetch questions");
-      }
-
-      const res = await response.json();
-      console.log(res);
-      setInterviews(res);
-      const scoresArray = res.map((interview: any) => interview.score);
-      setScoreList(scoresArray);
-      console.log(scoresArray);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchInterviews();
-  }, []);
-
-  const displayFiles = () => {
+  const DisplayFiles: React.FC = () => {
     return (
       <ul className="my-2 p-3 grid gap-6 grid-cols-2 lg:grid-cols-3 border-2 shadow-lg rounded-lg">
-        {interviews!
+        {interviews
           .sort(
             (a, b) =>
               new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
@@ -72,7 +53,7 @@ const DashboardPage: React.FC = () => {
                 <div className="flex-1 text-ellipsis overflow-hidden">
                   {/* "text-ellipsis overflow-hidden" is same as "truncate" */}
                   <h3 className="text-lg font-medium text-zinc-900 truncate">
-                    {file.name}
+                    {file.jobTitle}
                   </h3>
                 </div>
               </div>
@@ -112,7 +93,7 @@ const DashboardPage: React.FC = () => {
     );
   };
 
-  const displayEmpty = () => {
+  const DisplayEmpty: React.FC = () => {
     return (
       <div className="mt-16 flex flex-col items-center gap-2 text-zinc-400 select-none">
         <Ghost className="h-8 w-8 text-zinc-400" />
@@ -128,14 +109,16 @@ const DashboardPage: React.FC = () => {
     );
   };
 
-  const displayLoading = () => (
-    <Skeleton height={60} className="my-2" count={6} enableAnimation />
-  );
-
   return (
     <MaxWidthWrapper>
       <div className="my-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2">
+        <div
+          className={
+            interviews && interviews.length !== 0
+              ? "lg:col-span-2"
+              : "lg:col-span-3"
+          }
+        >
           <div className="flex flex-col items-start justify-between gap-4 border-b border-gray-200 pb-5 xs:flex-row xs:items-center sm:gap-0">
             <h2 className="mb-3 font-semibold text-gray-900 leading-loose">
               Good morning, welcome to <br />
@@ -146,54 +129,61 @@ const DashboardPage: React.FC = () => {
               className={buttonVariants({
                 size: "lg",
                 variant: "default",
+                className: "rounded-xl",
               })}
-              style={{ borderRadius: "40px" }}
             >
               Start practicing
             </Link>
           </div>
 
           {/* Charts */}
-          <h2 className="my-6 font-semibold text-gray-900 text-lg">Overview</h2>
-          <LineChart scores={scoreList} />
+          {interviews && interviews.length !== 0 ? (
+            <>
+              <h2 className="my-6 font-semibold text-gray-900 text-lg">
+                Overview
+              </h2>
+              <LineChart scores={scoreList} />
+            </>
+          ) : null}
         </div>
 
-        {/* This calender renders in large and small screen */}
-        <div className="hidden lg:block max-sm:block place-self-center lg:place-self-end max-sm:mt-10">
-          <Calendar
-            mode="single"
-            className="rounded-md border"
-            numberOfMonths={1}
-            styles={{
-              caption: { color: "purple" },
-            }}
-          />
-        </div>
-
-        {/* This calender renders in medium screen */}
-        <div className="hidden lg:hidden sm:block place-self-center lg:place-self-end mt-10">
-          <Calendar
-            mode="single"
-            className="rounded-md border"
-            numberOfMonths={2}
-            styles={{
-              caption: { color: "purple" },
-            }}
-          />
-        </div>
+        {interviews && interviews.length !== 0 ? (
+          <>
+            {/* This calender renders in large and small screen */}
+            <div className="hidden lg:block max-sm:block place-self-center lg:place-self-end max-sm:mt-10">
+              <Calendar
+                mode="single"
+                className="rounded-md border"
+                numberOfMonths={1}
+                styles={{
+                  caption: { color: "purple" },
+                }}
+              />
+            </div>
+            {/* This calender renders in medium screen */}
+            <div className="hidden lg:hidden sm:block place-self-center lg:place-self-end mt-10">
+              <Calendar
+                mode="single"
+                className="rounded-md border"
+                numberOfMonths={2}
+                styles={{
+                  caption: { color: "purple" },
+                }}
+              />
+            </div>
+          </>
+        ) : null}
 
         {/* History */}
         <div className="lg:col-span-3">
           <h2 className="my-6 font-semibold text-gray-900 text-lg">History</h2>
-          {interviews && interviews?.length !== 0
-            ? displayFiles()
-            : // : isLoading
-              // ? displayLoading()
-              displayEmpty()}
+          {interviews && interviews?.length !== 0 ? (
+            <DisplayFiles />
+          ) : (
+            <DisplayEmpty />
+          )}
         </div>
       </div>
     </MaxWidthWrapper>
   );
-};
-
-export default DashboardPage;
+}
