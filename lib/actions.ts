@@ -43,17 +43,14 @@ export async function actionSigninSignup() {
       error: false,
       message: "Logged in successfully",
     };
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error("Detailed error:", {
-        error: true,
-        message: error.message,
-        name: error.name,
-        stack: error.stack,
-      });
-    } else {
-      console.error("Unknown error:", error);
-    }
+  } catch (error: any) {
+    console.error("Detailed error:", {
+      error: true,
+      message: error.message,
+      name: error.name,
+      stack: error.stack,
+    });
+
     return {
       error: true,
       message: error,
@@ -88,6 +85,9 @@ export async function actionFetchInterviews() {
         createdAt: true,
         totalScore: true,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
     return {
@@ -95,17 +95,13 @@ export async function actionFetchInterviews() {
       message: "Interviews fetched successfully",
       interviews: interviews,
     };
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error("Detailed error:", {
-        error: true,
-        message: error.message,
-        name: error.name,
-        stack: error.stack,
-      });
-    } else {
-      console.error("Unknown error:", error);
-    }
+  } catch (error: any) {
+    console.error("Detailed error:", {
+      error: true,
+      message: error.message,
+      name: error.name,
+      stack: error.stack,
+    });
 
     return {
       error: true,
@@ -154,23 +150,23 @@ export async function actionDeleteInterview(id: string) {
     });
 
     // Revalidate the path to refresh server-side rendered content, so that the latest service data is displayed
-    revalidatePath("/dashboard");
+    // Issue: This is not working as expected for components inside Suspense, need to investigate further
+    // revalidatePath("/dashboard");
+    // revalidatePath("/records");
+    // Temporary solution: Use router.refres() in client components
+
     return {
       error: false,
       message: "Service successfully deleted",
       service: deletedService,
     };
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error("Detailed error:", {
-        error: true,
-        message: error.message,
-        name: error.name,
-        stack: error.stack,
-      });
-    } else {
-      console.error("Unknown error:", error);
-    }
+  } catch (error: any) {
+    console.error("Detailed error:", {
+      error: true,
+      message: error.message,
+      name: error.name,
+      stack: error.stack,
+    });
 
     return {
       error: true,

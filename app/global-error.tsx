@@ -34,7 +34,9 @@ export default function Error({ error, reset }: PageProps) {
         </div>
         <h3 className="mt-5 text-[36px] font-bold text-slate-800 lg:text-[50px]">
           Oops something went wrong ! <br />
-          <span className="text-neutral-400 text-sm">{error.message}</span>
+          <span className="text-neutral-400 text-sm">
+            {error?.message ? error.message : ""}
+          </span>
         </h3>
         <div className="mt-5 flex flex-col gap-5">
           <Button size="lg" variant="outline" onClick={reset}>

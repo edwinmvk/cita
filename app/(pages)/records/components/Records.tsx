@@ -6,11 +6,9 @@ import { useRouter } from "next/navigation";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import DisplayEmpty from "@/components/DisplayEmpty";
 import { actionDeleteInterview } from "@/lib/actions";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
+import { Button } from "@/components/ui/button";
 import { Calendar as CalenderIcon, Loader2, Trash } from "lucide-react";
 import { format } from "date-fns";
-import LineChart from "./LineChart";
 import { useToast } from "@/hooks/use-toast";
 
 type InterviewData = {
@@ -24,19 +22,12 @@ type Props = {
   interviews: InterviewData[];
 };
 
-export default function Dashboard({ interviews }: Props) {
-  // This is just the example to use useActionState with extra parameters
-  // const [state, action, isPending] = useActionState(actionServiceEdit, null);
-  // action={(formData) => action({ formData, data })}
-  // export async function actionServiceEdit(previousState = {},{ formData, data }){}
-
+export default function Records({ interviews }: Props) {
   const [pendingButtons, setPendingButtons] = useState<Record<string, boolean>>(
     {}
   );
   const router = useRouter();
   const { toast } = useToast();
-
-  const scoreList = interviews.map((interview) => interview.totalScore);
 
   async function handleDelete(id: string) {
     setPendingButtons((prev) => ({ ...prev, [id]: true }));
@@ -44,10 +35,11 @@ export default function Dashboard({ interviews }: Props) {
       await actionDeleteInterview(id);
       // const result = await actionDeleteInterview(id);
       // toast({
-      //   title: "Info",
+      //   title: result.error ? "Failed" : "Success",
       //   description: result.message,
       // });
     } catch (error: any) {
+      console.log(error);
       toast({
         title: "Info",
         description: error.message,
@@ -66,7 +58,7 @@ export default function Dashboard({ interviews }: Props) {
             (a, b) =>
               new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
           )
-          .slice(0, 3)
+          // .slice(0, 3)
           .map((file) => (
             <li
               key={file.id}
@@ -106,95 +98,26 @@ export default function Dashboard({ interviews }: Props) {
               </div>
             </li>
           ))}
-        {interviews && interviews.length > 3 ? (
-          <Link
-            className={`${buttonVariants({
-              size: "sm",
-              variant: "ghost",
-            })} place-self-center lg:place-self-start`}
-            href="/records"
-          >
-            See all...
-          </Link>
-        ) : null}
       </ul>
     );
   }
 
   return (
     <MaxWidthWrapper>
-      <div className="my-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div
-          className={
-            interviews && interviews.length !== 0
-              ? "lg:col-span-2"
-              : "lg:col-span-3"
-          }
-        >
-          <div className="flex flex-col items-start justify-between gap-4 xs:flex-row xs:items-center sm:gap-0">
-            <h2 className="font-semibold text-gray-900 leading-loose">
-              Good morning, welcome to <br />
-              <span className="text-3xl font-bold">My Dashboard</span>
-            </h2>
-            <Link
-              href="/setup"
-              className={buttonVariants({
-                size: "sm",
-                variant: "default",
-                className: "my-5 ",
-              })}
-            >
-              Start practicing
-            </Link>
-          </div>
-
-          {/* Charts */}
-          {interviews && interviews.length !== 0 ? (
-            <>
-              <h2 className="my-6 font-semibold text-gray-900 text-lg">
-                Overview
-              </h2>
-              <LineChart scores={scoreList} />
-            </>
-          ) : null}
+      <div className="my-10 grid grid-cols-1 gap-8">
+        <div className="flex flex-col items-start justify-between gap-4 xs:flex-row xs:items-center sm:gap-0">
+          <h2 className="font-semibold text-gray-900 leading-loose">
+            All my previous <br />
+            <span className="text-3xl font-bold">Records</span>
+          </h2>
         </div>
-
-        {interviews && interviews.length !== 0 ? (
-          <>
-            {/* This calender renders in large and small screen */}
-            <div className="hidden lg:block max-sm:block place-self-center lg:place-self-end max-sm:mt-10">
-              <Calendar
-                mode="single"
-                numberOfMonths={1}
-                styles={{
-                  caption: { color: "purple" },
-                }}
-              />
-            </div>
-            {/* This calender renders in medium screen */}
-            <div className="hidden lg:hidden sm:block place-self-center lg:place-self-end mt-10">
-              <Calendar
-                mode="single"
-                numberOfMonths={2}
-                styles={{
-                  caption: { color: "purple" },
-                }}
-              />
-            </div>
-          </>
-        ) : null}
 
         {/* History */}
-        <div className="lg:col-span-3">
-          <h2 className="mt-4 mb-6 font-semibold text-gray-900 text-lg">
-            Recents
-          </h2>
-          {interviews && interviews.length !== 0 ? (
-            <DisplayFiles />
-          ) : (
-            <DisplayEmpty />
-          )}
-        </div>
+        {interviews && interviews.length !== 0 ? (
+          <DisplayFiles />
+        ) : (
+          <DisplayEmpty />
+        )}
       </div>
     </MaxWidthWrapper>
   );
