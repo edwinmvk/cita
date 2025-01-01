@@ -8,7 +8,7 @@ import Records from "./components/Records";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { actionFetchInterviews } from "@/lib/actions";
-import DisplayLoading from "@/components/DisplayLoading";
+import Loading from "@/components/Loading";
 
 export const metadata: Metadata = {
   title: "Records",
@@ -154,7 +154,7 @@ export default async function Page() {
       <MaxWidthWrapper>
         <BreadcrumbNav />
       </MaxWidthWrapper>
-      <Suspense fallback={<DisplayLoading />}>
+      <Suspense fallback={<Loading />}>
         <RecordsPage />
       </Suspense>
     </section>

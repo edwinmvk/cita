@@ -13,7 +13,20 @@ export default function Page() {
   return (
     <section>
       {/* Hero Section */}
-      <div className="pt-36 pb-24 px-4 bg-gradient-to-br from-purple-50 via-white to-purple-50">
+      <div className="pt-36 pb-24 px-4">
+        {/* background design */}
+        <div
+          area-hidden="true"
+          className="absolute inset-x-0 -top-40 sm:-top-80 -z-10 pointer-events-none transform-gpu overflow-hidden blur-2xl"
+        >
+          <div
+            style={{
+              clipPath:
+                "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
+            }}
+            className="relative w-[36.125rem] sm:w-[72.187rem] left-[calc(50%-11rem)] sm:left-[calc(50%-10rem)] aspect-[1155/678] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#736eb9] to-[#923d99] opacity-30"
+          />
+        </div>
         <MaxWidthWrapper>
           <div className="container mx-auto text-center max-w-4xl">
             <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-6">
@@ -43,7 +56,7 @@ export default function Page() {
       </div>
 
       {/* Features Section */}
-      <div className="py-24 px-4">
+      <div className="py-24 px-4 bg-gradient-to-bl from-purple-50 via-white to-purple-50">
         <div className="container mx-auto grid md:grid-cols-3 gap-12">
           <Card className="p-6 hover:shadow-lg transition-shadow">
             <FileText className="w-12 h-12 text-emerald-500 mb-4" />
@@ -79,7 +92,7 @@ export default function Page() {
       </div>
 
       {/* Pricing Section */}
-      <div className="py-24 px-4 bg-gray-100">
+      <div className="py-24 px-4 bg-gradient-to-br from-violet-50 via-purple-50 to-white">
         <MaxWidthWrapper>
           <div className="container mx-auto">
             <h2 className="text-4xl font-bold text-center mb-12">
