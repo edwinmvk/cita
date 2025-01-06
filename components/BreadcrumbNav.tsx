@@ -19,7 +19,7 @@ export default async function BreadcrumbNav() {
   };
 
   return (
-    <div className="mt-5 -mb-2 w-full flex justify-start rounded-2xl ring-[0.4px] ring-offset-4 shadow-xl ring-zinc-300">
+    <div className="mt-5 -mb-2 w-full flex justify-center xs:justify-start rounded-2xl ring-[0.4px] ring-offset-4 shadow-xl ring-zinc-300">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>

@@ -1,10 +1,10 @@
-import Link from "next/link";
 import { Metadata } from "next";
+import Link from "next/link";
+import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Upload, FileText, Video, ArrowRight } from "lucide-react";
-import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 export const metadata: Metadata = {
   title: "Home",
