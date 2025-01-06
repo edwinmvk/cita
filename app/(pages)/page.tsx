@@ -14,7 +14,7 @@ export default function Page() {
   return (
     <section>
       {/* Hero Section */}
-      <div className="pt-36 pb-24 px-4">
+      <div className="py-24 px-4">
         {/* background design */}
         <div
           area-hidden="true"
@@ -29,7 +29,7 @@ export default function Page() {
           />
         </div>
         <MaxWidthWrapper>
-          <div className="container mx-auto text-center max-w-4xl">
+          <div className="mx-auto text-center max-w-4xl">
             <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-6">
               Meet your new{" "}
               <span className="bg-gradient-to-r from-purple-600 to-purple-400 bg-clip-text text-transparent">
@@ -58,7 +58,7 @@ export default function Page() {
 
       {/* Features Section */}
       <div className="py-24 px-4 bg-gradient-to-bl from-purple-50 via-white to-purple-50">
-        <div className="container mx-auto grid md:grid-cols-3 gap-12">
+        <div className="lg:container mx-auto grid md:grid-cols-3 gap-12">
           <Card className="p-6 hover:shadow-lg transition-shadow">
             <FileText className="w-12 h-12 text-emerald-500 mb-4" />
             <h3 className="text-2xl font-semibold mb-2 bg-gradient-to-r from-emerald-500 to-blue-500 bg-clip-text text-transparent">
@@ -95,7 +95,7 @@ export default function Page() {
       {/* Pricing Section */}
       <div className="py-24 px-4 bg-gradient-to-br from-violet-50 via-purple-50 to-white">
         <MaxWidthWrapper>
-          <div className="container mx-auto">
+          <div className="mx-auto">
             <h2 className="text-4xl font-bold text-center mb-12">
               Simple, transparent pricing
             </h2>
