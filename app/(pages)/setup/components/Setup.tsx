@@ -33,9 +33,6 @@ export default function Setup() {
   const [tempFile1, setTempFile1] = useState<string>("");
   const [tempFile2, setTempFile2] = useState<string>("");
 
-  const openResumeModal = () => setIsResumeModalOpen(true);
-  const openJobModal = () => setIsJobModalOpen(true);
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { files } = event.target;
     const fileReader = new FileReader();
@@ -116,7 +113,7 @@ export default function Setup() {
                   variant="ghost"
                   size="icon"
                   disabled={!file1}
-                  onClick={openResumeModal}
+                  onClick={() => setIsResumeModalOpen(!isResumeModalOpen)}
                 >
                   <ExternalLink
                     className={file1 ? `cursor-pointer` : `cursor-not-allowed`}
@@ -148,7 +145,7 @@ export default function Setup() {
                   variant="ghost"
                   size="icon"
                   disabled={!file2}
-                  onClick={openJobModal}
+                  onClick={() => setIsJobModalOpen(!isJobModalOpen)}
                 >
                   <ExternalLink
                     className={file2 ? `cursor-pointer` : `cursor-not-allowed`}
