@@ -16,7 +16,11 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   // get the session of logged in user
-  const { getUser } = getKindeServerSession();
+  const { getUser, isAuthenticated } = getKindeServerSession();
+
+  if (!(await isAuthenticated())) {
+    redirect("/auth-callback?origin=records");
+  }
 
   // check if the user is already logged in the browser session
   const user = await getUser();

@@ -4,6 +4,7 @@ import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Upload, FileText, Video, ArrowRight } from "lucide-react";
+import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -118,13 +119,18 @@ export default function Page() {
                     Standard question bank
                   </li>
                 </ul>
-                <Button variant="secondary" className="w-full">
+                <RegisterLink
+                  className={buttonVariants({
+                    variant: "secondary",
+                    className: "w-full",
+                  })}
+                >
                   Get started
-                </Button>
+                </RegisterLink>
               </Card>
 
               {/* Premium Plan */}
-              <Card className="p-8 shadow-sm border-purple-200 bg-purple-50">
+              <Card className="p-8 shadow-sm">
                 <h3 className="text-2xl font-semibold mb-4">Premium Plan</h3>
                 <div className="text-4xl font-bold mb-6">
                   $29<span className="text-xl text-gray-500">/month</span>
@@ -143,7 +149,15 @@ export default function Page() {
                     Industry-specific questions
                   </li>
                 </ul>
-                <Button className="w-full">Start free trial</Button>
+                <Link
+                  href="#"
+                  className={buttonVariants({
+                    variant: "default",
+                    className: "w-full",
+                  })}
+                >
+                  Start free trial
+                </Link>
               </Card>
             </div>
           </div>

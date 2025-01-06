@@ -1,9 +1,9 @@
 import { Metadata } from "next";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import prismadb from "@/lib/prismadb";
 import { inter } from "@/lib/fonts";
-import SetupPage from "./components/SetupPage";
+import Setup from "./components/Setup";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 
@@ -13,7 +13,11 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   // get the session of logged in user
-  const { getUser } = getKindeServerSession();
+  const { getUser, isAuthenticated } = getKindeServerSession();
+
+  if (!(await isAuthenticated())) {
+    redirect("/auth-callback?origin=setup");
+  }
 
   // check if the user is already logged in the browser session
   const user = await getUser();
@@ -39,7 +43,7 @@ export default async function Page() {
       <MaxWidthWrapper>
         <BreadcrumbNav />
       </MaxWidthWrapper>
-      <SetupPage />
+      <Setup />
     </section>
   );
 }
