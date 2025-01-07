@@ -1,25 +1,32 @@
 "use client";
-import "regenerator-runtime";
-import { MessageCircleOff, Mic, MicOff } from "lucide-react";
-import React, { useEffect, useRef, useState, useCallback } from "react";
 
-interface MicWithTranscriptProps {
+import "regenerator-runtime";
+import React, { useEffect, useRef, useState, useCallback } from "react";
+import { MessageCircleOff, Mic, MicOff } from "lucide-react";
+
+type Props = {
   setUserInput: (value: string) => void;
   transcript: string;
   resetTranscript: () => void; // Change to correct type
   SpeechRecognition: any; // Change to correct type if possible
   isListeningDisabled: boolean;
-}
+};
 
-const MicWithTranscript: React.FC<MicWithTranscriptProps> = ({
+export default function MicWithTranscript({
   setUserInput,
   transcript,
   resetTranscript,
   SpeechRecognition,
   isListeningDisabled,
-}) => {
+}: Props) {
   const [micOn, setMicOn] = useState<boolean>(false);
   const divRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (divRef.current) {
+      divRef.current.scrollTop = divRef.current.scrollHeight;
+    }
+  }, [transcript]);
 
   const handleVoice = useCallback(() => {
     if (!micOn) {
@@ -40,12 +47,6 @@ const MicWithTranscript: React.FC<MicWithTranscriptProps> = ({
     resetTranscript();
     setMicOn(false);
   }, [resetTranscript, SpeechRecognition]);
-
-  useEffect(() => {
-    if (divRef.current) {
-      divRef.current.scrollTop = divRef.current.scrollHeight;
-    }
-  }, [transcript]);
 
   return (
     <div>
@@ -69,6 +70,4 @@ const MicWithTranscript: React.FC<MicWithTranscriptProps> = ({
       </div>
     </div>
   );
-};
-
-export default MicWithTranscript;
+}

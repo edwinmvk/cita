@@ -1,32 +1,44 @@
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import prismadb from "@/lib/prismadb";
 import { inter } from "@/lib/fonts";
-import InterviewPage from "./components/InterviewPage";
+import Interview from "./components/Interview";
+
+export const metadata: Metadata = {
+  title: "Interview",
+};
 
 export default async function Page() {
   // get the session of logged in user
-  const { getUser } = getKindeServerSession();
+  const { getUser, isAuthenticated } = getKindeServerSession();
 
-  // Check if the user is already logged in the browser
-  const user = await getUser();
-  if (!user || !user.id) {
+  if (!(await isAuthenticated())) {
     redirect("/auth-callback?origin=interview");
   }
 
-  // If logged in browser, also check the database for the user
+  // check if the user is already logged in the browser session
+  const user = await getUser();
+  if (!user || !user.id) {
+    console.log("No user found in session, redirecting to auth-callback");
+    redirect("/auth-callback?origin=interview");
+  }
+
+  // if logged in browser, also check the database for the user
   const dbUser = await prismadb.user.findUnique({
     where: {
-      kindeId: user?.id,
+      kindeId: user.id,
     },
   });
+
   if (!dbUser) {
-    redirect("/auth-callback?origin=dashboard");
+    console.log("No user found in database, redirecting to auth-callback");
+    redirect("/auth-callback?origin=interview");
   }
 
   return (
     <section className={inter.className}>
-      <InterviewPage user={user?.given_name} />
+      <Interview user={user.given_name} />
     </section>
   );
 }

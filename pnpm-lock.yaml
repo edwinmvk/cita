@@ -8,9 +8,15 @@ importers:
 
   .:
     dependencies:
+      '@google/generative-ai':
+        specifier: ^0.21.0
+        version: 0.21.0
       '@kinde-oss/kinde-auth-nextjs':
         specifier: ^2.4.6
         version: 2.4.6(@babel/core@7.26.0)(next@15.1.3(@babel/core@7.26.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@pixiv/three-vrm':
+        specifier: ^3.3.2
+        version: 3.3.2(three@0.172.0)
       '@prisma/client':
         specifier: ^6.1.0
         version: 6.1.0(prisma@6.1.0)
@@ -50,6 +56,9 @@ importers:
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
+      face-api.js:
+        specifier: ^0.22.2
+        version: 0.22.2
       lucide-react:
         specifier: ^0.469.0
         version: 0.469.0(react@19.0.0)
@@ -68,12 +77,24 @@ importers:
       react-loading-skeleton:
         specifier: ^3.5.0
         version: 3.5.0(react@19.0.0)
+      react-speech-recognition:
+        specifier: ^3.10.0
+        version: 3.10.0(react@19.0.0)
+      react-webcam:
+        specifier: ^7.2.0
+        version: 7.2.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      regenerator-runtime:
+        specifier: ^0.14.1
+        version: 0.14.1
       tailwind-merge:
         specifier: ^2.6.0
         version: 2.6.0
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.17)
+      three:
+        specifier: ^0.172.0
+        version: 0.172.0
     devDependencies:
       '@types/node':
         specifier: ^20
@@ -84,6 +105,12 @@ importers:
       '@types/react-dom':
         specifier: ^19
         version: 19.0.2(@types/react@19.0.2)
+      '@types/react-speech-recognition':
+        specifier: ^3.9.5
+        version: 3.9.5
+      '@types/three':
+        specifier: ^0.171.0
+        version: 0.171.0
       postcss:
         specifier: ^8
         version: 8.4.49
@@ -610,6 +637,10 @@ packages:
   '@floating-ui/utils@0.2.8':
     resolution: {integrity: sha512-kym7SodPp8/wloecOpcmSnWJsK7M0E5Wg8UcFA+uO4B9s5d0ywXOEro/8HM9x0rW+TljRzul/14UYz3TleT3ig==}
 
+  '@google/generative-ai@0.21.0':
+    resolution: {integrity: sha512-7XhUbtnlkSEZK15kN3t+tzIMxsbKm/dSkKBFalj+20NvPKe1kBY7mR2P7vuijEn+f06z5+A8bVGKO0v39cr6Wg==}
+    engines: {node: '>=18.0.0'}
+
   '@img/sharp-darwin-arm64@0.33.5':
     resolution: {integrity: sha512-UT4p+iz/2H4twwAoLCqfA9UH5pI6DggwKEGuaPy7nCVQ8ZsiY5PIcrRvD1DzuY3qYL07NtIQcWnBSY/heikIFQ==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
@@ -815,6 +846,62 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
+
+  '@pixiv/three-vrm-core@3.3.2':
+    resolution: {integrity: sha512-vDxRVVPzxXjTIl/XrWQZff+3rwNZ+P1F//njLhQslj83aZ9xu8QVsGpBs6u00infeGXzX1f98S3ibY/Gjpj3Sg==}
+    peerDependencies:
+      three: '>=0.137'
+
+  '@pixiv/three-vrm-materials-hdr-emissive-multiplier@3.3.2':
+    resolution: {integrity: sha512-wKsv/Goom6kelMh2bOJ8Ungk48mOkBaZrKGuLOzODWS0Vj5pAj04etpaXKxWp+BKyHDcS93ttkYMUWi1/5MVeg==}
+    peerDependencies:
+      three: '>=0.137'
+
+  '@pixiv/three-vrm-materials-mtoon@3.3.2':
+    resolution: {integrity: sha512-0Z/Mx2zKtKYaz+pntsSq8bHEo6NcDZHUJ55Yq7F3V/BxqkuhhSMaY+9wauXuNk5ifcnY1eQtqJ2xaFAao6ndAg==}
+    peerDependencies:
+      three: '>=0.137'
+
+  '@pixiv/three-vrm-materials-v0compat@3.3.2':
+    resolution: {integrity: sha512-8L+ILx18GFaPmY/hcptW32JFp1Tvuyo26V7prq8jq6xkqLgjhYFpOLmRB4qE2fMveNITtYpXAC3nF93a4IgqfA==}
+    peerDependencies:
+      three: '>=0.137'
+
+  '@pixiv/three-vrm-node-constraint@3.3.2':
+    resolution: {integrity: sha512-Gt7b2aWmX9elcucMa4A0WIfmDb5aKvX8/XoHajWwlfqWRO/TLKwuI0WpC9UQ7S1vz10Pax79TMfZri8VMRf/GQ==}
+    peerDependencies:
+      three: '>=0.137'
+
+  '@pixiv/three-vrm-springbone@3.3.2':
+    resolution: {integrity: sha512-GxgjXUOewgEjxlysK2csyGwNR7nYGTJNqsMlg8qOXI6Xz2CwrLZKFp5yQUQinEjTWf0NVlwktAM4JN5Jkh75/w==}
+    peerDependencies:
+      three: '>=0.137'
+
+  '@pixiv/three-vrm@3.3.2':
+    resolution: {integrity: sha512-c2Z7kj91/pwZCjX2LT2sPhQ3gkzGKA1eE8F5AZp8JHpZF6yn+GpWPQ3g9kBbwnTgpuJSC62IGjg4KnKHa7ctwQ==}
+    peerDependencies:
+      three: '>=0.137'
+
+  '@pixiv/types-vrm-0.0@3.3.2':
+    resolution: {integrity: sha512-PXvYXGxP3n8TTOLCYiblLCsWc9AWUWiy5V8AeEm5ADDD5yaMa02Z8zw5/eoHDSPl/Byf/OpNLgeO1wReLE31iw==}
+
+  '@pixiv/types-vrmc-materials-hdr-emissive-multiplier-1.0@3.3.2':
+    resolution: {integrity: sha512-PLmNZ2ae91Va+Ye8dvfpJl2MBI7WRVlwNpHebJKgXUbg9qppWdNO8CHNIk5WF1XhQMIFuwbnB/ys496LutHQTA==}
+
+  '@pixiv/types-vrmc-materials-mtoon-1.0@3.3.2':
+    resolution: {integrity: sha512-X3IV31N6CJ/LUGzfgBbLYujPePhtmorqan8OPzuVSDoQ1IdJwWsSYmjWKqMUZuyxJYk+0ls5iVeNabOnBM2bpA==}
+
+  '@pixiv/types-vrmc-node-constraint-1.0@3.3.2':
+    resolution: {integrity: sha512-ncpM3Ok4EtjZ+2T+bbTavmk+qpXqEaee1zdWZZr+I7pzJgpoH2ghwJ77Ri75XQhPpTaPCA//etpRAnUyZkMoJg==}
+
+  '@pixiv/types-vrmc-springbone-1.0@3.3.2':
+    resolution: {integrity: sha512-C7a7UYq943JiF9K7JTuLvsdRLR7ZcURwLD0JaGn/3vHkoWJPkm/rrDB3txKtD3oGtlkmynIi0MgRuwDL80z10w==}
+
+  '@pixiv/types-vrmc-springbone-extended-collider-1.0@3.3.2':
+    resolution: {integrity: sha512-6pVCndF+09s14PKmqoRpA01rYjpWh/clnP6Q/d6q2IUPDtjrxor4m696eN8yU7qNJmqkCdrLODOoFxBftcCEKQ==}
+
+  '@pixiv/types-vrmc-vrm-1.0@3.3.2':
+    resolution: {integrity: sha512-FGvu2a6txJ9W/S8yIujFY9a8YMgKmSfIxHPnXj2aNFCaPhdnLb7LkG5b1bkxITUE5oHseLhSnEBv0Ni3nCKbzw==}
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -1207,16 +1294,53 @@ packages:
   '@swc/helpers@0.5.15':
     resolution: {integrity: sha512-JQ5TuMi45Owi4/BIMAJBoSQoOJu12oOk/gADqlcUL9JEdHB8vyjUSsxqeNXnmXHjYKMi2WcYtezGEEhqUI/E2g==}
 
+  '@tensorflow/tfjs-core@1.7.0':
+    resolution: {integrity: sha512-uwQdiklNjqBnHPeseOdG0sGxrI3+d6lybaKu2+ou3ajVeKdPEwpWbgqA6iHjq1iylnOGkgkbbnQ6r2lwkiIIHw==}
+    engines: {yarn: '>= 1.3.2'}
+
+  '@tweenjs/tween.js@23.1.3':
+    resolution: {integrity: sha512-vJmvvwFxYuGnF2axRtPYocag6Clbb5YS7kLL+SO/TeVFzHqDIWrNKYtcsPMibjDx9O+bu+psAy9NKfWklassUA==}
+
+  '@types/dom-speech-recognition@0.0.4':
+    resolution: {integrity: sha512-zf2GwV/G6TdaLwpLDcGTIkHnXf8JEf/viMux+khqKQKDa8/8BAUtXXZS563GnvJ4Fg0PBLGAaFf2GekEVSZ6GQ==}
+
   '@types/node@20.17.10':
     resolution: {integrity: sha512-/jrvh5h6NXhEauFFexRin69nA0uHJ5gwk4iDivp/DeoEua3uwCUto6PC86IpRITBOs4+6i2I56K5x5b6WYGXHA==}
+
+  '@types/offscreencanvas@2019.3.0':
+    resolution: {integrity: sha512-esIJx9bQg+QYF0ra8GnvfianIY8qWB0GBx54PK5Eps6m+xTj86KLavHv6qDhzKcu5UUOgNfJ2pWaIIV7TRUd9Q==}
 
   '@types/react-dom@19.0.2':
     resolution: {integrity: sha512-c1s+7TKFaDRRxr1TxccIX2u7sfCnc3RxkVyBIUA2lCpyqCF+QoAwQ/CBg7bsMdVwP120HEH143VQezKtef5nCg==}
     peerDependencies:
       '@types/react': ^19.0.0
 
+  '@types/react-speech-recognition@3.9.5':
+    resolution: {integrity: sha512-m3Sg3Xtj/YcEUu+nLPGwI6oq1wcSblsuyAmXgBfW6Nprfmtl+A+kH4ruPzzFKnFkq6WmmRxdsLvt0nLRAAJtBw==}
+
   '@types/react@19.0.2':
     resolution: {integrity: sha512-USU8ZI/xyKJwFTpjSVIrSeHBVAGagkHQKPNbxeWwql/vDmnTIBgx+TJnhFnj1NXgz8XfprU0egV2dROLGpsBEg==}
+
+  '@types/seedrandom@2.4.27':
+    resolution: {integrity: sha512-YvMLqFak/7rt//lPBtEHv3M4sRNA+HGxrhFZ+DQs9K2IkYJbNwVIb8avtJfhDiuaUBX/AW0jnjv48FV8h3u9bQ==}
+
+  '@types/stats.js@0.17.3':
+    resolution: {integrity: sha512-pXNfAD3KHOdif9EQXZ9deK82HVNaXP5ZIF5RP2QG6OQFNTaY2YIetfrE9t528vEreGQvEPRDDc8muaoYeK0SxQ==}
+
+  '@types/three@0.171.0':
+    resolution: {integrity: sha512-oLuT1SAsT+CUg/wxUTFHo0K3NtJLnx9sJhZWQJp/0uXqFpzSk1hRHmvWvpaAWSfvx2db0lVKZ5/wV0I0isD2mQ==}
+
+  '@types/webgl-ext@0.0.30':
+    resolution: {integrity: sha512-LKVgNmBxN0BbljJrVUwkxwRYqzsAEPcZOe6S2T6ZaBDIrFp0qu4FNlpc5sM1tGbXUYFgdVQIoeLk1Y1UoblyEg==}
+
+  '@types/webgl2@0.0.4':
+    resolution: {integrity: sha512-PACt1xdErJbMUOUweSrbVM7gSIYm1vTncW2hF6Os/EeWi6TXYAYMPp+8v6rzHmypE5gHrxaxZNXgMkJVIdZpHw==}
+
+  '@types/webxr@0.5.20':
+    resolution: {integrity: sha512-JGpU6qiIJQKUuVSKx1GtQnHJGxRjtfGIhzO2ilq43VZZS//f1h1Sgexbdk+Lq+7569a6EYhOWrUpIruR/1Enmg==}
+
+  '@webgpu/types@0.1.52':
+    resolution: {integrity: sha512-eI883Nlag2hGIkhXxAnq8s4APpqXWuPL3Gbn2ghiU12UjLvfCbVqHK4XfXl3eLRTatqcMmeK7jws7IwWsGfbzw==}
 
   ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
@@ -1399,12 +1523,18 @@ packages:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}
     engines: {node: '>=0.10.0'}
 
+  face-api.js@0.22.2:
+    resolution: {integrity: sha512-9Bbv/yaBRTKCXjiDqzryeKhYxmgSjJ7ukvOvEBy6krA0Ah/vNBlsf7iBNfJljWiPA8Tys1/MnB3lyP2Hfmsuyw==}
+
   fast-glob@3.3.2:
     resolution: {integrity: sha512-oX2ruAFQwf/Orj8m737Y5adxDQO0LAB7/S5MnxCdTNDd4p6BsyIVsv9JQsATbTSq8KHRpLwIHbVlUNatxd+1Ow==}
     engines: {node: '>=8.6.0'}
 
   fastq@1.18.0:
     resolution: {integrity: sha512-QKHXPW0hD8g4UET03SdOdunzSouc9N4AuHdsX8XNcTsuz+yYFILVNIX4l9yHABMhiEI9Db0JTTIpu0wB+Y1QQw==}
+
+  fflate@0.8.2:
+    resolution: {integrity: sha512-cPJU47OaAoCbg0pBvzsgpTPhmhqI5eJjh/JIu8tPj5q+T7iLvW/JAYUqmE7KOB4R1ZyEhzBaIQpQpardBF5z8A==}
 
   fill-range@7.1.1:
     resolution: {integrity: sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==}
@@ -1533,6 +1663,9 @@ packages:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
 
+  meshoptimizer@0.18.1:
+    resolution: {integrity: sha512-ZhoIoL7TNV4s5B6+rx5mC//fw8/POGyNxS/DZyCJeiZ12ScLfVwRE/GfsxwiTkMYYD5DmK2/JXnEVXqL4rF+Sw==}
+
   micromatch@4.0.8:
     resolution: {integrity: sha512-PXwfBhYu0hBCPw8Dn0E+WDYb7af3dSLVWKi3HGv84IdF4TyFoC0ysxFd0Goxw7nSv4T/PzEJQxsYsEiFCKo2BA==}
     engines: {node: '>=8.6'}
@@ -1576,6 +1709,10 @@ packages:
         optional: true
       sass:
         optional: true
+
+  node-fetch@2.1.2:
+    resolution: {integrity: sha512-IHLHYskTc2arMYsHZH82PVX8CSKT5lzb7AXeyO06QnjGDKtkv+pv3mEki6S7reB/x1QPo+YPxQRNEVgR5V/w3Q==}
+    engines: {node: 4.x || >=6.0.0}
 
   node-releases@2.0.19:
     resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==}
@@ -1710,6 +1847,11 @@ packages:
       '@types/react':
         optional: true
 
+  react-speech-recognition@3.10.0:
+    resolution: {integrity: sha512-EVSr4Ik8l9urwdPiK2r0+ADrLyDDrjB0qBRdUWO+w2MfwEBrj6NuRmy1GD3x7BU/V6/hab0pl8Lupen0zwlJyw==}
+    peerDependencies:
+      react: '>=16.8.0'
+
   react-style-singleton@2.2.3:
     resolution: {integrity: sha512-b6jSvxvVnyptAiLjbkWLE/lOnR4lfTtDAl+eUC7RZy+QQWc6wRzIV2CE6xBuMmDxc2qIihtDCZD5NPOFl7fRBQ==}
     engines: {node: '>=10'}
@@ -1719,6 +1861,12 @@ packages:
     peerDependenciesMeta:
       '@types/react':
         optional: true
+
+  react-webcam@7.2.0:
+    resolution: {integrity: sha512-xkrzYPqa1ag2DP+2Q/kLKBmCIfEx49bVdgCCCcZf88oF+0NPEbkwYk3/s/C7Zy0mhM8k+hpdNkBLzxg8H0aWcg==}
+    peerDependencies:
+      react: '>=16.2.0'
+      react-dom: '>=16.2.0'
 
   react@19.0.0:
     resolution: {integrity: sha512-V8AVnmPIICiWpGfm6GLzCR/W5FXLchHop40W4nXBmdlEceh16rCN8O8LNWm5bh5XUX91fh7KpA+W0TgMKmgTpQ==}
@@ -1769,6 +1917,9 @@ packages:
 
   scheduler@0.25.0:
     resolution: {integrity: sha512-xFVuu11jh+xcO7JOAGJNOXld8/TcEHK/4CituBUeUb5hqxJLj9YuemAEuvm9gQ/+pgXYfbQuqAkiYu+u7YEsNA==}
+
+  seedrandom@2.4.3:
+    resolution: {integrity: sha512-2CkZ9Wn2dS4mMUWQaXLsOAfGD+irMlLEeSP3cMxpGbgyOOzJGFa+MWCOMTOCMyZinHRPxyOj/S/C57li/1to6Q==}
 
   semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
@@ -1864,12 +2015,18 @@ packages:
   thenify@3.3.1:
     resolution: {integrity: sha512-RVZSIV5IG10Hk3enotrhvz0T9em6cyHBLkH/YAZuKqd8hRkKhSfCGIcP2KUY0EPxndzANBmNllzWPwak+bheSw==}
 
+  three@0.172.0:
+    resolution: {integrity: sha512-6HMgMlzU97MsV7D/tY8Va38b83kz8YJX+BefKjspMNAv0Vx6dxMogHOrnRl/sbMIs3BPUKijPqDqJ/+UwJbIow==}
+
   to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
 
   ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
+
+  tslib@1.14.1:
+    resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
 
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
@@ -2621,6 +2778,8 @@ snapshots:
 
   '@floating-ui/utils@0.2.8': {}
 
+  '@google/generative-ai@0.21.0': {}
+
   '@img/sharp-darwin-arm64@0.33.5':
     optionalDependencies:
       '@img/sharp-libvips-darwin-arm64': 1.0.4
@@ -2783,6 +2942,65 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.18.0
+
+  '@pixiv/three-vrm-core@3.3.2(three@0.172.0)':
+    dependencies:
+      '@pixiv/types-vrm-0.0': 3.3.2
+      '@pixiv/types-vrmc-vrm-1.0': 3.3.2
+      three: 0.172.0
+
+  '@pixiv/three-vrm-materials-hdr-emissive-multiplier@3.3.2(three@0.172.0)':
+    dependencies:
+      '@pixiv/types-vrmc-materials-hdr-emissive-multiplier-1.0': 3.3.2
+      three: 0.172.0
+
+  '@pixiv/three-vrm-materials-mtoon@3.3.2(three@0.172.0)':
+    dependencies:
+      '@pixiv/types-vrm-0.0': 3.3.2
+      '@pixiv/types-vrmc-materials-mtoon-1.0': 3.3.2
+      three: 0.172.0
+
+  '@pixiv/three-vrm-materials-v0compat@3.3.2(three@0.172.0)':
+    dependencies:
+      '@pixiv/types-vrm-0.0': 3.3.2
+      '@pixiv/types-vrmc-materials-mtoon-1.0': 3.3.2
+      three: 0.172.0
+
+  '@pixiv/three-vrm-node-constraint@3.3.2(three@0.172.0)':
+    dependencies:
+      '@pixiv/types-vrmc-node-constraint-1.0': 3.3.2
+      three: 0.172.0
+
+  '@pixiv/three-vrm-springbone@3.3.2(three@0.172.0)':
+    dependencies:
+      '@pixiv/types-vrm-0.0': 3.3.2
+      '@pixiv/types-vrmc-springbone-1.0': 3.3.2
+      '@pixiv/types-vrmc-springbone-extended-collider-1.0': 3.3.2
+      three: 0.172.0
+
+  '@pixiv/three-vrm@3.3.2(three@0.172.0)':
+    dependencies:
+      '@pixiv/three-vrm-core': 3.3.2(three@0.172.0)
+      '@pixiv/three-vrm-materials-hdr-emissive-multiplier': 3.3.2(three@0.172.0)
+      '@pixiv/three-vrm-materials-mtoon': 3.3.2(three@0.172.0)
+      '@pixiv/three-vrm-materials-v0compat': 3.3.2(three@0.172.0)
+      '@pixiv/three-vrm-node-constraint': 3.3.2(three@0.172.0)
+      '@pixiv/three-vrm-springbone': 3.3.2(three@0.172.0)
+      three: 0.172.0
+
+  '@pixiv/types-vrm-0.0@3.3.2': {}
+
+  '@pixiv/types-vrmc-materials-hdr-emissive-multiplier-1.0@3.3.2': {}
+
+  '@pixiv/types-vrmc-materials-mtoon-1.0@3.3.2': {}
+
+  '@pixiv/types-vrmc-node-constraint-1.0@3.3.2': {}
+
+  '@pixiv/types-vrmc-springbone-1.0@3.3.2': {}
+
+  '@pixiv/types-vrmc-springbone-extended-collider-1.0@3.3.2': {}
+
+  '@pixiv/types-vrmc-vrm-1.0@3.3.2': {}
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
@@ -3165,17 +3383,57 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
+  '@tensorflow/tfjs-core@1.7.0':
+    dependencies:
+      '@types/offscreencanvas': 2019.3.0
+      '@types/seedrandom': 2.4.27
+      '@types/webgl-ext': 0.0.30
+      '@types/webgl2': 0.0.4
+      node-fetch: 2.1.2
+      seedrandom: 2.4.3
+
+  '@tweenjs/tween.js@23.1.3': {}
+
+  '@types/dom-speech-recognition@0.0.4': {}
+
   '@types/node@20.17.10':
     dependencies:
       undici-types: 6.19.8
+
+  '@types/offscreencanvas@2019.3.0': {}
 
   '@types/react-dom@19.0.2(@types/react@19.0.2)':
     dependencies:
       '@types/react': 19.0.2
 
+  '@types/react-speech-recognition@3.9.5':
+    dependencies:
+      '@types/dom-speech-recognition': 0.0.4
+
   '@types/react@19.0.2':
     dependencies:
       csstype: 3.1.3
+
+  '@types/seedrandom@2.4.27': {}
+
+  '@types/stats.js@0.17.3': {}
+
+  '@types/three@0.171.0':
+    dependencies:
+      '@tweenjs/tween.js': 23.1.3
+      '@types/stats.js': 0.17.3
+      '@types/webxr': 0.5.20
+      '@webgpu/types': 0.1.52
+      fflate: 0.8.2
+      meshoptimizer: 0.18.1
+
+  '@types/webgl-ext@0.0.30': {}
+
+  '@types/webgl2@0.0.4': {}
+
+  '@types/webxr@0.5.20': {}
+
+  '@webgpu/types@0.1.52': {}
 
   ansi-regex@5.0.1: {}
 
@@ -3342,6 +3600,11 @@ snapshots:
 
   esutils@2.0.3: {}
 
+  face-api.js@0.22.2:
+    dependencies:
+      '@tensorflow/tfjs-core': 1.7.0
+      tslib: 1.14.1
+
   fast-glob@3.3.2:
     dependencies:
       '@nodelib/fs.stat': 2.0.5
@@ -3353,6 +3616,8 @@ snapshots:
   fastq@1.18.0:
     dependencies:
       reusify: 1.0.4
+
+  fflate@0.8.2: {}
 
   fill-range@7.1.1:
     dependencies:
@@ -3454,6 +3719,8 @@ snapshots:
 
   merge2@1.4.1: {}
 
+  meshoptimizer@0.18.1: {}
+
   micromatch@4.0.8:
     dependencies:
       braces: 3.0.3
@@ -3499,6 +3766,8 @@ snapshots:
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
+
+  node-fetch@2.1.2: {}
 
   node-releases@2.0.19: {}
 
@@ -3611,6 +3880,10 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.0.2
 
+  react-speech-recognition@3.10.0(react@19.0.0):
+    dependencies:
+      react: 19.0.0
+
   react-style-singleton@2.2.3(@types/react@19.0.2)(react@19.0.0):
     dependencies:
       get-nonce: 1.0.1
@@ -3618,6 +3891,11 @@ snapshots:
       tslib: 2.8.1
     optionalDependencies:
       '@types/react': 19.0.2
+
+  react-webcam@7.2.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+    dependencies:
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
 
   react@19.0.0: {}
 
@@ -3669,6 +3947,8 @@ snapshots:
       queue-microtask: 1.2.3
 
   scheduler@0.25.0: {}
+
+  seedrandom@2.4.3: {}
 
   semver@6.3.1: {}
 
@@ -3799,11 +4079,15 @@ snapshots:
     dependencies:
       any-promise: 1.3.0
 
+  three@0.172.0: {}
+
   to-regex-range@5.0.1:
     dependencies:
       is-number: 7.0.0
 
   ts-interface-checker@0.1.13: {}
+
+  tslib@1.14.1: {}
 
   tslib@2.8.1: {}
 

@@ -2,29 +2,28 @@
 
 import { useRef, useState } from "react";
 import Webcam from "react-webcam";
+import * as faceapi from "face-api.js";
 import { Avatar } from "@/components/ui/avatar";
 import { Camera, CameraOff, SquareUserRound } from "lucide-react";
-import * as faceapi from "face-api.js";
 
-interface EmotionValues {
+type Props = {
+  setTotalDetectionTime: (value: any) => void;
+  setEmotionValues: (value: any) => void;
+};
+
+type EmotionValues = {
   angry: number;
   sad: number;
   neutral: number;
   happy: number;
   surprised: number;
-}
+};
 
-interface WebcamProps {
-  setTotalDetectionTime: (value: any) => void;
-  setEmotionValues: (value: any) => void;
-}
-
-const WebCamera: React.FC<WebcamProps> = ({
+export default function WebCamera({
   setTotalDetectionTime,
   setEmotionValues,
-}) => {
+}: Props) {
   const [videoStatus, setVideoStatus] = useState<boolean>(false);
-
   const webcamRef = useRef<Webcam>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -32,16 +31,9 @@ const WebCamera: React.FC<WebcamProps> = ({
     setVideoStatus((prevVideoStatus) => !prevVideoStatus);
   }
 
-  const videoConstraints = {
-    width: 1280,
-    height: 720,
-    facingMode: "user",
-  };
-
   // LOAD MODELS FROM FACE API
 
   const loadModelsWhenCamera = () => {
-    // console.log(webcamRef.current?.video);
     Promise.all([
       // THIS FOR FACE DETECT AND LOAD FROM YOU PUBLIC/MODELS DIRECTORY
       faceapi.nets.tinyFaceDetector.loadFromUri("/models"),
@@ -140,10 +132,7 @@ const WebCamera: React.FC<WebcamProps> = ({
             ref={webcamRef}
             audio={false}
             mirrored={false}
-            // videoConstraints={videoConstraints}
             // disablePictureInPicture={true}
-            // className="inset-0 w-full h-full"
-            // style={{ transform: "scaleX(-1)" }}
             muted={true}
             // videoConstraints={videoConstraints}
             disablePictureInPicture={true}
@@ -174,6 +163,4 @@ const WebCamera: React.FC<WebcamProps> = ({
       </button>
     </div>
   );
-};
-
-export default WebCamera;
+}

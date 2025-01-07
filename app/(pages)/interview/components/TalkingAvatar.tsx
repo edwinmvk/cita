@@ -9,11 +9,11 @@ import {
   VRMLoaderPlugin,
 } from "@pixiv/three-vrm";
 
-interface TalkingAvatarProps {
+type Props = {
   isUserSpeaking: boolean;
-}
+};
 
-const TalkingAvatar: React.FC<TalkingAvatarProps> = ({ isUserSpeaking }) => {
+export default function TalkingAvatar({ isUserSpeaking }: Props) {
   // Global variables
   const containerRef = useRef<HTMLDivElement>(null);
   const camera = new THREE.PerspectiveCamera(30.0, 700 / 500, 0.1, 50.0);
@@ -308,6 +308,4 @@ const TalkingAvatar: React.FC<TalkingAvatarProps> = ({ isUserSpeaking }) => {
   }, [isUserSpeaking]);
 
   return <div ref={containerRef} />;
-};
-
-export default TalkingAvatar;
+}

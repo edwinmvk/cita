@@ -124,7 +124,7 @@ export default function Setup() {
                 <DialogHeader>
                   <DialogTitle>Resume Content</DialogTitle>
                 </DialogHeader>
-                <DialogDescription className="whitespace-pre-wrap">
+                <DialogDescription className="whitespace-pre-wrap max-h-[70vh] overflow-y-auto text-sm text-muted-foreground p-4">
                   {file1}
                 </DialogDescription>
               </DialogContent>
@@ -156,7 +156,7 @@ export default function Setup() {
                 <DialogHeader>
                   <DialogTitle>Job Description Content</DialogTitle>
                 </DialogHeader>
-                <DialogDescription className="whitespace-pre-wrap">
+                <DialogDescription className="whitespace-pre-wrap max-h-[70vh] overflow-y-auto text-sm text-muted-foreground p-4">
                   {file2}
                 </DialogDescription>
               </DialogContent>

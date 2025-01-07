@@ -1,7 +1,5 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-
 let voicesList: SpeechSynthesisVoice[] | null = null;
 
 async function loadVoices(): Promise<SpeechSynthesisVoice[]> {
